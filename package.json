@@ -1,0 +1,15 @@
+{
+  "name": "omar",
+  "version": "1.0.0",
+  "description": "training",
+  "main": "tp1.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "omar",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.2",
+    "mongodb": "^2.2.26"
+  }
+}
