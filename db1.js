@@ -1,6 +1,7 @@
 var express = require('express');
 var http = require('http');
-var mongoDb  = require('mongodb').MongoClient;
+var mongo = require('mongodb');
+var mongoDb  = mongo.MongoClient;
 var app = express();
 var bodyParser = require('body-parser');
 
@@ -23,7 +24,7 @@ app.all('/*', function(req, res, next){
 });
 
 app.use('/',express.static('/web'));
-var objectID = mongoDb.ObjectID;
+ObjectId = mongo.ObjectID;
 mongoDb.connect(url,function(err,db1){
     console.log('connected')
     db = db1;
@@ -37,14 +38,15 @@ app.get('/all',function(req,res){
 
 app.post('/insert',function(req,res) {
     //var user = {nom:"user nom",prenom:"user prenom"};
-    db.collection('users').insert(req.body,function(error,results) {
-        res.json({"users":result});
-        //res.end()
-        //res.redirect('/all');
+    db.collection('users').insert(req.body,function(error,result) {
+        res.json({"user":result});
     })
-    
-    
-    console.log(req.body);
+    //console.log(req.body);
+})
+
+app.get('/delete/:id',function(req,res){
+    db.collection('users').remove({"_id" : ObjectId(req.params.id)})
+    console.log(req.params.id)
 })
 
 app.listen(8084)
